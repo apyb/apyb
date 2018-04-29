@@ -1,0 +1,8 @@
+*.pyc
+*.pyo
+*.sqlite3
+local.py
+package-lock.json
+Pipfile.lock
+node_modules/
+media/

@@ -1,0 +1,84 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Associação Python Brasil</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+    <style type="text/css" media="screen">
+      .hero-home {
+        background-image: url({% static 'website/img/pybr13.jpg' %});
+        background-size: cover;
+      }
+
+      .hero-home .hero-body, .hero-home .hero-head {
+        background-color: rgba(0, 0, 0, 0.8);
+      }
+
+      .hero-home .title {
+        font-size: 3rem;
+      }
+
+      .hero-home .subtitle {
+        font-size: 2.25rem;
+      }
+    </style>
+  </head>
+
+  <body>
+    <section class="hero is-dark is-fullheight hero-home">
+      <!-- Hero head: will stick at the top -->
+      <div class="hero-head">
+        <header class="navbar">
+          <div class="container">
+            <div class="navbar-brand">
+              <a class="navbar-item" href="{% url 'home' %}">
+                <h1>APyB</h1>
+              </a>
+
+              <span class="navbar-burger burger" data-target="navbarMenuHeroC">
+                <span></span>
+                <span></span>
+                <span></span>
+              </span>
+            </div>
+
+            <div id="navbarMenuHeroC" class="navbar-menu">
+              <div class="navbar-end">
+                <a class="navbar-item">
+                  Login
+                </a>
+
+                <span class="navbar-item">
+                  <a class="button is-dark is-inverted">
+                    <span>Participe</span>
+                  </a>
+                </span>
+              </div>
+            </div>
+          </div>
+        </header>
+      </div>
+
+      <!-- Hero content: will be in the middle -->
+      <div class="hero-body">
+        <div class="container has-text-centered">
+          <h1 class="title">
+            Associação Python Brasil
+          </h1>
+
+          <h2 class="subtitle">
+            Empoderando pessoas para alcançar grandes coisas
+          </h2>
+        </div>
+      </div>
+    </section>
+
+    {% block content %}
+    {% endblock content %}
+  </body>
+</html>
