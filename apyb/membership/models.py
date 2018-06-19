@@ -1,6 +1,16 @@
 from django.conf import settings
+from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+
+
+class ProfileQuerySet(models.QuerySet):
+
+    def president(self):
+        try:
+            return self.get(role=Profile.ROLE_PRESIDENT)
+        except ObjectDoesNotExist:
+            return None
 
 
 class Profile(models.Model):
@@ -37,3 +47,24 @@ class Profile(models.Model):
 
     github_username = models.CharField(max_length=39, blank=True)
     thumbnail_url = models.URLField()
+
+    objects = ProfileQuerySet.as_manager()
+
+    @property
+    def is_president(self):
+        return self.role == self.ROLE_PRESIDENT
+
+    def _ensure_unique_board(self):
+        if self.is_president:
+            Profile.objects.exclude(
+                pk=self.pk
+            ).filter(
+                role=self.ROLE_PRESIDENT
+            ).update(
+                role=self.ROLE_MEMBER
+            )
+
+    def save(self, *args, **kwargs):
+        self._ensure_unique_board()
+
+        super(Profile, self).save(*args, **kwargs)
