@@ -88,3 +88,48 @@ class ProfileTestCase(TestCase):
         mommy.make(Profile, role=Profile.ROLE_MEMBER)
 
         self.assertIsNone(Profile.objects.financial_director())
+
+    # technology director tests
+
+    def test_is_technology_director(self):
+        profile = mommy.make(Profile, role=Profile.ROLE_TECHNOLOGY_DIRECTOR)
+
+        self.assertTrue(profile.is_technology_director)
+
+    def test_is_not_a_technology_director(self):
+        profile = mommy.make(Profile, role=Profile.ROLE_NOT_A_MEMBER)
+
+        self.assertFalse(profile.is_technology_director)
+
+    def test_only_one_technology_director(self):
+        mommy.make(Profile, role=Profile.ROLE_TECHNOLOGY_DIRECTOR)
+        mommy.make(Profile, role=Profile.ROLE_TECHNOLOGY_DIRECTOR)
+
+        self.assertEqual(
+            Profile.objects.filter(
+                role=Profile.ROLE_TECHNOLOGY_DIRECTOR).count(),
+            1
+        )
+
+    def test_old_technology_director_back_to_member(self):
+        old_technology_director = mommy.make(
+            Profile, role=Profile.ROLE_TECHNOLOGY_DIRECTOR
+        )
+        mommy.make(Profile, role=Profile.ROLE_TECHNOLOGY_DIRECTOR)
+
+        old_technology_director.refresh_from_db()
+
+        self.assertEqual(old_technology_director.role, Profile.ROLE_MEMBER)
+
+    def test_get_technology_director(self):
+        technology_director = mommy.make(
+            Profile, role=Profile.ROLE_TECHNOLOGY_DIRECTOR)
+
+        self.assertEqual(
+            Profile.objects.technology_director(), technology_director
+        )
+
+    def test_get_technology_director_none(self):
+        mommy.make(Profile, role=Profile.ROLE_MEMBER)
+
+        self.assertIsNone(Profile.objects.technology_director())
