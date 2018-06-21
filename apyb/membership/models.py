@@ -24,6 +24,12 @@ class ProfileQuerySet(models.QuerySet):
         except ObjectDoesNotExist:
             return None
 
+    def marketing_director(self):
+        try:
+            return self.get(role=Profile.ROLE_MARKETING_DIRECTOR)
+        except ObjectDoesNotExist:
+            return None
+
 
 class Profile(models.Model):
 
@@ -80,6 +86,10 @@ class Profile(models.Model):
     @property
     def is_technology_director(self):
         return self.role == self.ROLE_TECHNOLOGY_DIRECTOR
+
+    @property
+    def is_marketing_director(self):
+        return self.role == self.ROLE_MARKETING_DIRECTOR
 
     def _ensure_unique_board(self):
         if self.role in self.UNIQUE_ROLES:
