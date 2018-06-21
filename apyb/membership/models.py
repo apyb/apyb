@@ -12,6 +12,12 @@ class ProfileQuerySet(models.QuerySet):
         except ObjectDoesNotExist:
             return None
 
+    def financial_director(self):
+        try:
+            return self.get(role=Profile.ROLE_FINANCIAL_DIRECTOR)
+        except ObjectDoesNotExist:
+            return None
+
 
 class Profile(models.Model):
 
@@ -36,6 +42,13 @@ class Profile(models.Model):
         (ROLE_ALTERNATE, _('Alternate')),
     )
 
+    UNIQUE_ROLES = (
+        ROLE_PRESIDENT,
+        ROLE_FINANCIAL_DIRECTOR,
+        ROLE_TECHNOLOGY_DIRECTOR,
+        ROLE_MARKETING_DIRECTOR,
+    )
+
     user = models.OneToOneField(
         settings.AUTH_USER_MODEL, related_name='profile',
         on_delete=models.CASCADE
@@ -54,12 +67,16 @@ class Profile(models.Model):
     def is_president(self):
         return self.role == self.ROLE_PRESIDENT
 
+    @property
+    def is_financial_director(self):
+        return self.role == self.ROLE_FINANCIAL_DIRECTOR
+
     def _ensure_unique_board(self):
-        if self.is_president:
+        if self.role in self.UNIQUE_ROLES:
             Profile.objects.exclude(
                 pk=self.pk
             ).filter(
-                role=self.ROLE_PRESIDENT
+                role=self.role
             ).update(
                 role=self.ROLE_MEMBER
             )
