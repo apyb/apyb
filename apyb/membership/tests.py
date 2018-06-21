@@ -217,6 +217,24 @@ class ProfileTestCase(TestCase):
 
         self.assertEqual(Profile.objects.fiscal_council_members().count(), 2)
 
+    # alternate tests
+
+    def test_is_alternate_member(self):
+        profile = mommy.make(Profile, role=Profile.ROLE_ALTERNATE)
+
+        self.assertTrue(profile.is_alternate_member)
+
+    def test_is_not_alternate_member(self):
+        profile = mommy.make(Profile, role=Profile.ROLE_NOT_A_MEMBER)
+
+        self.assertFalse(profile.is_alternate_member)
+
+    def test_get_alternate_members_queryset(self):
+        mommy.make(Profile, role=Profile.ROLE_ALTERNATE)
+        mommy.make(Profile, role=Profile.ROLE_ALTERNATE)
+
+        self.assertEqual(Profile.objects.alternate_members().count(), 2)
+
     # board member tests
 
     def test_is_board_member_president(self):
