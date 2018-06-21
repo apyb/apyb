@@ -35,6 +35,7 @@ class ProfileTestCase(TestCase):
         self.assertEqual(old_president.role, Profile.ROLE_MEMBER)
 
     def test_get_president(self):
+        mommy.make(Profile, role=Profile.ROLE_NOT_A_MEMBER)
         president = mommy.make(Profile, role=Profile.ROLE_PRESIDENT)
 
         self.assertEqual(Profile.objects.president(), president)
@@ -77,6 +78,7 @@ class ProfileTestCase(TestCase):
         self.assertEqual(old_financial_director.role, Profile.ROLE_MEMBER)
 
     def test_get_financial_director(self):
+        mommy.make(Profile, role=Profile.ROLE_NOT_A_MEMBER)
         financial_director = mommy.make(
             Profile, role=Profile.ROLE_FINANCIAL_DIRECTOR)
 
@@ -122,6 +124,7 @@ class ProfileTestCase(TestCase):
         self.assertEqual(old_technology_director.role, Profile.ROLE_MEMBER)
 
     def test_get_technology_director(self):
+        mommy.make(Profile, role=Profile.ROLE_NOT_A_MEMBER)
         technology_director = mommy.make(
             Profile, role=Profile.ROLE_TECHNOLOGY_DIRECTOR)
 
@@ -167,6 +170,7 @@ class ProfileTestCase(TestCase):
         self.assertEqual(old_marketing_director.role, Profile.ROLE_MEMBER)
 
     def test_get_marketing_director(self):
+        mommy.make(Profile, role=Profile.ROLE_NOT_A_MEMBER)
         marketing_director = mommy.make(
             Profile, role=Profile.ROLE_MARKETING_DIRECTOR)
 
@@ -192,6 +196,7 @@ class ProfileTestCase(TestCase):
         self.assertFalse(profile.is_deliberative_council_member)
 
     def test_get_deliberative_council_members_queryset(self):
+        mommy.make(Profile, role=Profile.ROLE_NOT_A_MEMBER)
         mommy.make(Profile, role=Profile.ROLE_DELIBERATIVE_COUNCIL)
         mommy.make(Profile, role=Profile.ROLE_DELIBERATIVE_COUNCIL)
 
@@ -212,6 +217,7 @@ class ProfileTestCase(TestCase):
         self.assertFalse(profile.is_fiscal_council_member)
 
     def test_get_fiscal_council_members_queryset(self):
+        mommy.make(Profile, role=Profile.ROLE_NOT_A_MEMBER)
         mommy.make(Profile, role=Profile.ROLE_FISCAL_COUNCIL)
         mommy.make(Profile, role=Profile.ROLE_FISCAL_COUNCIL)
 
@@ -230,14 +236,39 @@ class ProfileTestCase(TestCase):
         self.assertFalse(profile.is_alternate_member)
 
     def test_get_alternate_members_queryset(self):
+        mommy.make(Profile, role=Profile.ROLE_NOT_A_MEMBER)
         mommy.make(Profile, role=Profile.ROLE_ALTERNATE)
         mommy.make(Profile, role=Profile.ROLE_ALTERNATE)
 
         self.assertEqual(Profile.objects.alternate_members().count(), 2)
 
+    # member tests
+
+    def test_is_member(self):
+        profile = mommy.make(Profile, role=Profile.ROLE_MEMBER)
+
+        self.assertTrue(profile.is_member)
+
+        for role in Profile.BOARD_ROLES:
+            profile = mommy.make(Profile, role=role)
+
+            self.assertTrue(profile.is_member)
+
+    def test_is_not_member(self):
+        profile = mommy.make(Profile, role=Profile.ROLE_NOT_A_MEMBER)
+
+        self.assertFalse(profile.is_member)
+
+    def test_get_members_queryset(self):
+        mommy.make(Profile, role=Profile.ROLE_NOT_A_MEMBER)
+        mommy.make(Profile, role=Profile.ROLE_PRESIDENT)
+        mommy.make(Profile, role=Profile.ROLE_MEMBER)
+
+        self.assertEqual(Profile.objects.members().count(), 2)
+
     # board member tests
 
-    def test_is_board_member_president(self):
+    def test_is_board_member(self):
         for role in Profile.BOARD_ROLES:
             profile = mommy.make(Profile, role=role)
 
@@ -249,6 +280,7 @@ class ProfileTestCase(TestCase):
         self.assertFalse(profile.is_board_member)
 
     def test_get_board_members_queryset(self):
+        mommy.make(Profile, role=Profile.ROLE_MEMBER)
         mommy.make(Profile, role=Profile.ROLE_PRESIDENT)
         mommy.make(Profile, role=Profile.ROLE_FISCAL_COUNCIL)
 

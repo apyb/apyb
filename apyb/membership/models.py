@@ -39,6 +39,9 @@ class ProfileQuerySet(models.QuerySet):
     def alternate_members(self):
         return self.filter(role=Profile.ROLE_ALTERNATE)
 
+    def members(self):
+        return self.exclude(role=Profile.ROLE_NOT_A_MEMBER)
+
     def board_members(self):
         return self.filter(role__in=Profile.BOARD_ROLES)
 
@@ -124,6 +127,10 @@ class Profile(models.Model):
     @property
     def is_alternate_member(self):
         return self.role == self.ROLE_ALTERNATE
+
+    @property
+    def is_member(self):
+        return self.role != self.ROLE_NOT_A_MEMBER
 
     @property
     def is_board_member(self):
