@@ -36,6 +36,9 @@ class ProfileQuerySet(models.QuerySet):
     def fiscal_council_members(self):
         return self.filter(role=Profile.ROLE_FISCAL_COUNCIL)
 
+    def board_members(self):
+        return self.filter(role__in=Profile.BOARD_ROLES)
+
 
 class Profile(models.Model):
 
@@ -65,6 +68,16 @@ class Profile(models.Model):
         ROLE_FINANCIAL_DIRECTOR,
         ROLE_TECHNOLOGY_DIRECTOR,
         ROLE_MARKETING_DIRECTOR,
+    )
+
+    BOARD_ROLES = (
+        ROLE_PRESIDENT,
+        ROLE_FINANCIAL_DIRECTOR,
+        ROLE_TECHNOLOGY_DIRECTOR,
+        ROLE_MARKETING_DIRECTOR,
+        ROLE_DELIBERATIVE_COUNCIL,
+        ROLE_FISCAL_COUNCIL,
+        ROLE_ALTERNATE,
     )
 
     user = models.OneToOneField(
@@ -104,6 +117,10 @@ class Profile(models.Model):
     @property
     def is_fiscal_council_member(self):
         return self.role == self.ROLE_FISCAL_COUNCIL
+
+    @property
+    def is_board_member(self):
+        return self.role in self.BOARD_ROLES
 
     def _ensure_unique_board(self):
         if self.role in self.UNIQUE_ROLES:
