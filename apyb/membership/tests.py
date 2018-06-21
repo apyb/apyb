@@ -198,3 +198,21 @@ class ProfileTestCase(TestCase):
         self.assertEqual(
             Profile.objects.deliberative_council_members().count(), 2
         )
+
+    # fiscal council tests
+
+    def test_is_fiscal_council_member(self):
+        profile = mommy.make(Profile, role=Profile.ROLE_FISCAL_COUNCIL)
+
+        self.assertTrue(profile.is_fiscal_council_member)
+
+    def test_is_not_fiscal_council_member(self):
+        profile = mommy.make(Profile, role=Profile.ROLE_NOT_A_MEMBER)
+
+        self.assertFalse(profile.is_fiscal_council_member)
+
+    def test_get_fiscal_council_members_queryset(self):
+        mommy.make(Profile, role=Profile.ROLE_FISCAL_COUNCIL)
+        mommy.make(Profile, role=Profile.ROLE_FISCAL_COUNCIL)
+
+        self.assertEqual(Profile.objects.fiscal_council_members().count(), 2)

@@ -33,6 +33,9 @@ class ProfileQuerySet(models.QuerySet):
     def deliberative_council_members(self):
         return self.filter(role=Profile.ROLE_DELIBERATIVE_COUNCIL)
 
+    def fiscal_council_members(self):
+        return self.filter(role=Profile.ROLE_FISCAL_COUNCIL)
+
 
 class Profile(models.Model):
 
@@ -97,6 +100,10 @@ class Profile(models.Model):
     @property
     def is_deliberative_council_member(self):
         return self.role == self.ROLE_DELIBERATIVE_COUNCIL
+
+    @property
+    def is_fiscal_council_member(self):
+        return self.role == self.ROLE_FISCAL_COUNCIL
 
     def _ensure_unique_board(self):
         if self.role in self.UNIQUE_ROLES:
