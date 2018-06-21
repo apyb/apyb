@@ -178,3 +178,23 @@ class ProfileTestCase(TestCase):
         mommy.make(Profile, role=Profile.ROLE_MEMBER)
 
         self.assertIsNone(Profile.objects.marketing_director())
+
+    # deliberative council tests
+
+    def test_is_deliberative_council_member(self):
+        profile = mommy.make(Profile, role=Profile.ROLE_DELIBERATIVE_COUNCIL)
+
+        self.assertTrue(profile.is_deliberative_council_member)
+
+    def test_is_not_deliberative_council_member(self):
+        profile = mommy.make(Profile, role=Profile.ROLE_NOT_A_MEMBER)
+
+        self.assertFalse(profile.is_deliberative_council_member)
+
+    def test_get_deliberative_council_members_queryset(self):
+        mommy.make(Profile, role=Profile.ROLE_DELIBERATIVE_COUNCIL)
+        mommy.make(Profile, role=Profile.ROLE_DELIBERATIVE_COUNCIL)
+
+        self.assertEqual(
+            Profile.objects.deliberative_council_members().count(), 2
+        )

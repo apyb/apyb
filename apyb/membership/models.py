@@ -30,6 +30,9 @@ class ProfileQuerySet(models.QuerySet):
         except ObjectDoesNotExist:
             return None
 
+    def deliberative_council_members(self):
+        return self.filter(role=Profile.ROLE_DELIBERATIVE_COUNCIL)
+
 
 class Profile(models.Model):
 
@@ -90,6 +93,10 @@ class Profile(models.Model):
     @property
     def is_marketing_director(self):
         return self.role == self.ROLE_MARKETING_DIRECTOR
+
+    @property
+    def is_deliberative_council_member(self):
+        return self.role == self.ROLE_DELIBERATIVE_COUNCIL
 
     def _ensure_unique_board(self):
         if self.role in self.UNIQUE_ROLES:
