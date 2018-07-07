@@ -10,15 +10,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
     <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
     <style type="text/css" media="screen">
-      .hero-home {
-        background-image: url({% static 'website/img/pybr13.jpg' %});
-        background-size: cover;
-      }
-
-      .hero-home .hero-body, .hero-home .hero-head {
-        background-color: rgba(0, 0, 0, 0.8);
-      }
-
       .hero-home .title {
         font-size: 3rem;
       }
@@ -30,59 +21,103 @@
       .home-intro p {
         margin-bottom: 1rem;
       }
+
+      .home-hero-img {
+        background-size: cover;
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        opacity: 0;
+        -webkit-transition: all 1s ease-in-out;
+        transition: all 1s ease-in-out;
+      }
     </style>
   </head>
 
   <body>
-    <section class="hero is-dark is-fullheight hero-home">
-      <!-- Hero head: will stick at the top -->
-      <div class="hero-head">
-        <header class="navbar">
-          <div class="container">
-            <div class="navbar-brand">
-              <a class="navbar-item" href="{% url 'home' %}">
-                <h1>APyB</h1>
-              </a>
-
-              <span class="navbar-burger burger" data-target="navbarMenuHeroC">
-                <span></span>
-                <span></span>
-                <span></span>
-              </span>
-            </div>
-
-            <div id="navbarMenuHeroC" class="navbar-menu">
-              <div class="navbar-end">
-                <a class="navbar-item">
-                  Login
+    {% block header %}
+      <section id="heroHome" class="hero is-dark is-fullheight hero-home">
+        <!-- Hero head: will stick at the top -->
+        <div class="hero-head">
+          <header class="navbar">
+            <div class="container">
+              <div class="navbar-brand">
+                <a class="navbar-item" href="{% url 'home' %}">
+                  <h1>APyB</h1>
                 </a>
 
-                <span class="navbar-item">
-                  <a class="button is-dark is-inverted">
-                    <span>Participe</span>
-                  </a>
+                <span class="navbar-burger burger" data-target="navbarMenuHeroC">
+                  <span></span>
+                  <span></span>
+                  <span></span>
                 </span>
               </div>
+
+              <div id="navbarMenuHeroC" class="navbar-menu">
+                <div class="navbar-end">
+                  <a class="navbar-item">
+                    Login
+                  </a>
+
+                  <span class="navbar-item">
+                    <a class="button is-dark is-inverted">
+                      <span>Participe</span>
+                    </a>
+                  </span>
+                </div>
+              </div>
             </div>
-          </div>
-        </header>
-      </div>
-
-      <!-- Hero content: will be in the middle -->
-      <div class="hero-body">
-        <div class="container has-text-centered">
-          <h1 class="title">
-            Associação Python Brasil
-          </h1>
-
-          <h2 class="subtitle">
-            Empoderando pessoas para alcançar grandes coisas
-          </h2>
+          </header>
         </div>
-      </div>
-    </section>
+
+        <!-- Hero content: will be in the middle -->
+        <div class="hero-body">
+          <div class="container has-text-centered">
+            <h1 class="title">
+              Associação Python Brasil
+            </h1>
+
+            <h2 class="subtitle">
+              Empoderando pessoas para alcançar grandes coisas
+            </h2>
+          </div>
+        </div>
+      </section>
+    {% endblock header %}
 
     {% block content %}
     {% endblock content %}
+
+    <script charset="utf-8">
+      // Hero fade image
+      var i = 1;
+      var heroPhotos = [];;
+
+      for (var photoPath of {{ hero_photos|safe }}) {
+        var photo = document.createElement('div');
+
+        photo.style.backgroundImage = 'url(' + photoPath + ')';
+        photo.className = 'home-hero-img';
+
+        document.getElementById('heroHome').prepend(photo);
+
+        heroPhotos.push(photo);
+      }
+
+      heroPhotos[0].style.opacity = 0.6;
+
+      setInterval(function() {
+        var current = i - 1;
+        var next = i;
+
+        heroPhotos[current % heroPhotos.length].style.opacity = 0;
+        heroPhotos[next % heroPhotos.length].style.opacity = 0.6;
+
+        i++;
+      }, 5000);
+    </script>
+
+    {% block bottom_javascript %}
+    {% endblock bottom_javascript %}
   </body>
 </html>
