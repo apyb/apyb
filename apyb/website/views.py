@@ -5,9 +5,9 @@ from django.contrib.staticfiles.templatetags.staticfiles import static
 from django.views.generic import TemplateView
 
 HERO_ROOT = 'website/img/hero'
-HERO_PHOTOS = [
+HERO_PHOTOS = sorted([
     static(f'{HERO_ROOT}/{img}') for img in os.listdir(find(HERO_ROOT))
-]
+], reverse=True)
 
 
 class Home(TemplateView):
