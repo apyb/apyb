@@ -28,6 +28,7 @@
 
       .home-hero-img {
         background-size: cover;
+        background-position: center;
         position: absolute;
         height: 100%;
         width: 100%;
@@ -50,21 +51,21 @@
                   <h1>APyB</h1>
                 </a>
 
-                <span class="navbar-burger burger" data-target="navbarMenuHeroC">
+                <span class="navbar-burger burger" data-target="navbarMenuHero">
                   <span></span>
                   <span></span>
                   <span></span>
                 </span>
               </div>
 
-              <div id="navbarMenuHeroC" class="navbar-menu">
+              <div id="navbarMenuHero" class="navbar-menu">
                 <div class="navbar-end">
-                  <a class="navbar-item">
+                  <a href="https://associados.python.org.br/login/" class="navbar-item">
                     Login
                   </a>
 
                   <span class="navbar-item">
-                    <a class="button is-dark is-inverted">
+                    <a href="https://associados.python.org.br/members/signup/" class="button is-dark is-inverted">
                       <span>Participe</span>
                     </a>
                   </span>
@@ -91,6 +92,34 @@
 
     {% block content %}
     {% endblock content %}
+
+    <script charset="utf-8">
+      // Nabvar mobile menu
+      document.addEventListener('DOMContentLoaded', function () {
+        // Get all "navbar-burger" elements
+        var $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+        // Check if there are any navbar burgers
+        if ($navbarBurgers.length > 0) {
+
+          // Add a click event on each of them
+          $navbarBurgers.forEach(function ($el) {
+            $el.addEventListener('click', function () {
+
+              // Get the target from the "data-target" attribute
+              var target = $el.dataset.target;
+              var $target = document.getElementById(target);
+
+              // Toggle the class on both the "navbar-burger" and the "navbar-menu"
+              $el.classList.toggle('is-active');
+              $target.classList.toggle('is-active');
+
+            });
+          });
+        }
+
+      });
+    </script>
 
     <script charset="utf-8">
       // Hero fade image
