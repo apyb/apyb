@@ -42,6 +42,9 @@
   <body>
     {% block header %}
       <section id="heroHome" class="hero is-dark is-fullheight hero-home">
+        {% for photo in hero_photos %}
+          <div style="background-image: url('{{ photo }}'); {% if forloop.first %}opacity: 0.6{% else %}opacity: 0{% endif %};" class="home-hero-img"></div>
+        {% endfor %}
         <!-- Hero head: will stick at the top -->
         <div class="hero-head">
           <header class="navbar">
@@ -124,20 +127,7 @@
     <script charset="utf-8">
       // Hero fade image
       var i = 1;
-      var heroPhotos = [];;
-
-      for (var photoPath of {{ hero_photos|safe }}) {
-        var photo = document.createElement('div');
-
-        photo.style.backgroundImage = 'url(' + photoPath + ')';
-        photo.className = 'home-hero-img';
-
-        document.getElementById('heroHome').prepend(photo);
-
-        heroPhotos.push(photo);
-      }
-
-      heroPhotos[0].style.opacity = 0.6;
+      var heroPhotos = document.getElementsByClassName('home-hero-img');
 
       setInterval(function() {
         var current = i - 1;
