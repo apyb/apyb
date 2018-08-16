@@ -1,6 +1,7 @@
 *.pyc
 *.pyo
 *.sqlite3
+.coverage
 local.py
 package-lock.json
 Pipfile.lock
