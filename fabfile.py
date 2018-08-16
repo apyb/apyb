@@ -103,7 +103,7 @@ def _symlink():
 
 def _cleanup():
     if len(env.releases) > env.releases_limit:
-        directories = reversed(env.releases)
+        directories = list(reversed(env.releases))
         del directories[:env.releases_limit]
         directories = ' '.join([
             os.path.join(env.releases_path, release) for release in directories
@@ -115,7 +115,7 @@ def _cleanup():
 def _reload_project():
     # restart apyb uwsgi service
     run(f'find {env.current_release} -name "*.pyc" -delete')
-    sudo(f'service apyb restart')
+    sudo(f'/usr/sbin/service apyb restart', shell=False)
 
 
 def _rollback_code():
