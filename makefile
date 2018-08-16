@@ -10,6 +10,10 @@ install: # standard python installation
 install.hack: # install development requirements
 	pip install -r requirements-dev.txt
 
+.PHONY: run
+run: # start server
+	cd $(PROJECT) && python manage.py runserver
+
 .PHONY: deploy
 deploy: # deploy to production
 	fab production deploy
