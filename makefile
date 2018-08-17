@@ -29,3 +29,8 @@ test: # run tests
 .PHONY: cover
 cover: # coverage tests
 	cd $(PROJECT) && coverage run manage.py test
+	cd $(PROJECT) && coverage report
+
+.PHONY: coveralls
+coveralls: # coveralls report
+	cd $(PROJECT) && coveralls

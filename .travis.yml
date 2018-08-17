@@ -5,4 +5,4 @@ install:
     - pip install -r requirements-dev.txt
 script: make cover
 after_success:
-    - coveralls
+    - make coveralls
