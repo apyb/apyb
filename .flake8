@@ -1,0 +1,2 @@
+[flake8]
+exclude = ./apyb/membership/migrations/,./apyb/membership/website/
