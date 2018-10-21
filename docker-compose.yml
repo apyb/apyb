@@ -1,0 +1,22 @@
+version: '2'
+services:
+  nginx:
+    image: nginx:latest
+    container_name: ngapyb
+    ports:
+      - "80:8000"
+    volumes:
+      - ./apyb:/src
+      - ./config/nginx:/etc/nginx/conf.d
+    depends_on:
+      - web
+    restart: always
+  web:
+    build: .
+    restart: always
+    container_name: dgapyb
+    command: bash -c "pwd && ls -la && python manage.py makemigrations && python manage.py migrate && gunicorn -w 4 raffle.wsgi:application -b 0.0.0.0:8000"
+    volumes:
+      - ./apyb:/src
+    expose:
+      - "8000"
