@@ -11,14 +11,32 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 '''
 
 import os
+import environ
 
-from .paths import BASE_DIR
+env = environ.Env(
+    DEBUG=(bool, False),
+    )
+env.read_env()
 
-ALLOWED_HOSTS = []
+BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+ROOT_DIR = environ.Path(__file__) - 2  # (/a/b/myfile.py - 3 = /)
 
+# DEBUG
+# See: https://docs.djangoproject.com/en/dev/ref/settings/#debug
+DEBUG = env("DEBUG", default=False)
+
+# SECRET CONFIGURATION
+# See: https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
+SECRET_KEY = env("DJANGO_SECRET_KEY", default='CHANGEME!!!')
+
+# Allowed Hosts
+ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=['localhost'])
+
+DATABASES = {
+    'default': env.db("DATABASE_URL", default="postgres://postgres:postgres123@localhost/apyb"),
+}
 
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
