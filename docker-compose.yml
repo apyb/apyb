@@ -16,6 +16,8 @@ services:
     restart: always
     container_name: dgapyb
     command: bash -c "pwd && ls -la && python manage.py makemigrations && python manage.py migrate && gunicorn -w 4 apyb.wsgi:application -b 0.0.0.0:8000"
+    environment:
+      - DATABASE_URL=postgres://postgres:postgres@db/postgres
     volumes:
       - ./apyb:/src
     expose:
