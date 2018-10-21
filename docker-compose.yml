@@ -15,8 +15,13 @@ services:
     build: .
     restart: always
     container_name: dgapyb
-    command: bash -c "pwd && ls -la && python manage.py makemigrations && python manage.py migrate && gunicorn -w 4 raffle.wsgi:application -b 0.0.0.0:8000"
+    command: bash -c "pwd && ls -la && python manage.py makemigrations && python manage.py migrate && gunicorn -w 4 apyb.wsgi:application -b 0.0.0.0:8000"
     volumes:
       - ./apyb:/src
     expose:
       - "8000"
+    depends_on:
+      - db
+  db:
+    image: postgres:10
+    container_name: psapyb
