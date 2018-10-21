@@ -18,6 +18,7 @@ env = environ.Env(
     )
 env.read_env()
 
+BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 ROOT_DIR = environ.Path(__file__) - 2  # (/a/b/myfile.py - 3 = /)
 
 # DEBUG
