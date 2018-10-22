@@ -1,0 +1,3 @@
+DATABASE_URL=sqlite:///my-local-sqlite.db
+DEBUG=on
+ALLOWED_HOSTS=127.0.0.1,localhost
