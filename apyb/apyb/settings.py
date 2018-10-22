@@ -15,7 +15,7 @@ import environ
 
 env = environ.Env(
     DEBUG=(bool, False),
-    )
+)
 env.read_env()
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
@@ -45,6 +45,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.staticfiles',
 
+    # authentication provider
+    'oauth2_provider',
+    'corsheaders',
+
     # project apps
     'membership',
     'website',
@@ -52,6 +56,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -80,6 +85,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'apyb.wsgi.application'
 
+
+# CORS Configuration
+CORS_ORIGIN_WHITELIST = env.list("CORS_ORIGIN_WHITELIST", default=['localhost:8000'])
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
