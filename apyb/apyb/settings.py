@@ -15,7 +15,7 @@ import environ
 
 env = environ.Env(
     DEBUG=(bool, False),
-)
+    )
 env.read_env()
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
@@ -46,14 +46,27 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.sessions',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
 
     # authentication provider
     'oauth2_provider',
     'corsheaders',
 
+    #allauth
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.github',
+    'allauth.socialaccount.providers.linkedin',
+    'allauth.socialaccount.providers.facebook',
+    'allauth.socialaccount.providers.twitter',
+
     # project apps
     'membership',
     'website',
+
+
 ]
 
 MIDDLEWARE = [
@@ -87,7 +100,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'apyb.wsgi.application'
 
-
 # CORS Configuration
 CORS_ORIGIN_WHITELIST = env.list("CORS_ORIGIN_WHITELIST",
                                  default=['localhost:8000'])
@@ -119,6 +131,12 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+
+SITE_ID = 1
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
