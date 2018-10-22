@@ -2,11 +2,11 @@ version: '2'
 services:
   nginx:
     image: nginx:latest
-    container_name: ngapyb
+    container_name: balancer
     ports:
       - "80:8000"
     volumes:
-      - ./apyb:/src
+      - ./apyb/website:/src
       - ./config/nginx:/etc/nginx/conf.d
     depends_on:
       - web
@@ -14,7 +14,7 @@ services:
   web:
     build: .
     restart: always
-    container_name: dgapyb
+    container_name: django01
     command: bash -c "pwd && ls -la && python manage.py makemigrations && python manage.py migrate && gunicorn -w 4 apyb.wsgi:application -b 0.0.0.0:8000"
     environment:
       - DATABASE_URL=postgres://postgres:postgres@db/postgres
@@ -27,4 +27,4 @@ services:
       - db
   db:
     image: postgres:10
-    container_name: psapyb
+    container_name: database
