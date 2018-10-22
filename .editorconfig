@@ -1,4 +1,5 @@
-i# https://editorconfig.org/
+# Leia sobre EditorConfig aqui ;)
+# https://EditorConfig.org
 
 root = true
 
@@ -11,4 +12,4 @@ end_of_line = lf
 charset = utf-8
 
 [*.py]
-max_line_length=80
+max_line_length = 80
