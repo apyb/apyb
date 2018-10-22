@@ -61,7 +61,7 @@ docker-compose up -d
 ###### Estrutura do docker
 
 container | serviço
--|-|-
+-|-
 ngapyb | nginx
 psapyb | postgresql
 dgapyb | gunicorn
