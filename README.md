@@ -17,10 +17,7 @@ Durante o desenvolvimento, você pode utilizar
    `pip install -r requirements-dev.txt` ou, se estiver
    usando `pipenv`, utilize
    `pipenv install -r requirements-dev.txt`.
-3. Com o ambiente criado, você precisa definir a variável de ambiente que
-   indica qual configuração será usada. Para desenvolvimento, utilize
-   `export DJANGO_SETTINGS_MODULES=apyb.settings.dev`.
-4. Para iniciar o servidor, utilize `python manage.py runserver`; `manage.py`
+3. Para iniciar o servidor, utilize `python manage.py runserver`; `manage.py`
    se encontra dentro do diretório `apyb`.
 
 Este projeto utiliza [EditorConfig](https://editorconfig.org/) para manter o

@@ -8,3 +8,6 @@ Pipfile
 Pipfile.lock
 node_modules/
 media/
+
+# VIM temporary files
+*.sw?

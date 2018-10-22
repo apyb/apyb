@@ -23,19 +23,19 @@ ROOT_DIR = environ.Path(__file__) - 2  # (/a/b/myfile.py - 3 = /)
 
 # DEBUG
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#debug
-DEBUG = env("DEBUG", default=False)
+DEBUG = env("DEBUG", default=True)
 
 # SECRET CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
 SECRET_KEY = env("DJANGO_SECRET_KEY", default='CHANGEME!!!')
 
 # Allowed Hosts
-ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=['localhost'])
+ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=['localhost',
+                                                   '127.0.0.1'])
 
 DATABASES = {
-    'default':
-        env.db("DATABASE_URL",
-               default="postgres://postgres:postgres123@localhost/apyb"),
+    'default': env.db("DATABASE_URL",
+                      default="sqlite://associados.db"),
 }
 
 # Application definition
