@@ -17,13 +17,7 @@ Durante o desenvolvimento, você pode utilizar
    `pip install -r requirements-dev.txt` ou, se estiver
    usando `pipenv`, utilize
    `pipenv install -r requirements-dev.txt`.
-3. Com o ambiente criado, faça um link simbólico de `apyb/apyb/dev-environment`
-   para `apyb/apyb/.env`. Isso serve para que o
-   [Django-Environ](https://github.com/joke2k/django-environ) utilize os
-   valores contidos neste arquivo ao invés da configuração de produção. Para
-   criar esse link simbólico, utilize `ln -sf apyb/apyb/dev-environment
-   apyb/apyb/.env`.
-4. Para iniciar o servidor, utilize `python manage.py runserver`; `manage.py`
+3. Para iniciar o servidor, utilize `python manage.py runserver`; `manage.py`
    se encontra dentro do diretório `apyb`.
 
 Este projeto utiliza [EditorConfig](https://editorconfig.org/) para manter o
