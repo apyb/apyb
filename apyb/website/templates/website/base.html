@@ -63,15 +63,24 @@
 
               <div id="navbarMenuHero" class="navbar-menu">
                 <div class="navbar-end">
-                  <a href="https://associados.python.org.br/login/" class="navbar-item">
-                    Login
-                  </a>
-
-                  <span class="navbar-item">
-                    <a href="https://associados.python.org.br/members/signup/" class="button is-dark is-inverted">
-                      <span>Participe</span>
+                  {% if user.is_authenticated %}
+                    <span class="navbar-item">
+                      Autenticado como: {{ user.username }}
+                    </span>
+                    <a href="{% url 'logout' %}" class="navbar-item">
+                      Sair
                     </a>
-                  </span>
+                  {% else %}
+                    <a href="{% url 'login' %}" class="navbar-item">
+                      Login
+                    </a>
+
+                    <span class="navbar-item">
+                      <a href="https://associados.python.org.br/members/signup/" class="button is-dark is-inverted">
+                        <span>Participe</span>
+                      </a>
+                    </span>
+                  {% endif %}
                 </div>
               </div>
             </div>
