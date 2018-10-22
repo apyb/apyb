@@ -33,7 +33,9 @@ SECRET_KEY = env("DJANGO_SECRET_KEY", default='CHANGEME!!!')
 ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=['localhost'])
 
 DATABASES = {
-    'default': env.db("DATABASE_URL", default="postgres://postgres:postgres123@localhost/apyb"),
+    'default':
+        env.db("DATABASE_URL",
+               default="postgres://postgres:postgres123@localhost/apyb"),
 }
 
 # Application definition
@@ -87,7 +89,8 @@ WSGI_APPLICATION = 'apyb.wsgi.application'
 
 
 # CORS Configuration
-CORS_ORIGIN_WHITELIST = env.list("CORS_ORIGIN_WHITELIST", default=['localhost:8000'])
+CORS_ORIGIN_WHITELIST = env.list("CORS_ORIGIN_WHITELIST",
+                                 default=['localhost:8000'])
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
