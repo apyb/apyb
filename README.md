@@ -5,6 +5,24 @@
 
 Novo site da Associação Python Brasil
 
+## Ambiente de desenvolvimento
+
+Durante o desenvolvimento, você pode utilizar
+[`pip`](https://pip.pypa.io/en/stable/installing/) ou 
+[`pipenv`](https://pipenv.readthedocs.io/en/latest/) ou mesmo
+[`virtualenvwrapper`](https://virtualenvwrapper.readthedocs.io/en/latest/install.html). 
+
+1. Crie o virtualenv com sua ferramenta favorita.
+2. Instale as dependências de desenvolvimento com 
+   `pip install -r requirements-dev.txt` ou, se estiver 
+   usando `pipenv`, utilize 
+   `pipenv install -r requirements-dev.txt`.
+3. Com o ambiente criado, você precisa definir a variável de ambiente que
+   indica qual configuração será usada. Para desenvolvimento, utilize
+   `export DJANGO_SETTINGS_MODULES=apyb.settings.dev`.
+4. Para iniciar o servidor, utilize `python manage.py runserver`; `manage.py`
+   se encontra dentro do diretório `apyb`.
+
 ## Instalação
 
 ### Requisitos 
