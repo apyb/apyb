@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
 
+    'django_markup',
     # authentication provider
     'oauth2_provider',
     'corsheaders',

@@ -1,0 +1,12 @@
+{% extends 'website/base.html' %}
+{% load static %}
+{% load markup_tags %}
+
+{% block content %}
+  <section class="section is-medium home-intro">
+    <div class="container">
+      {{ markdown_content|apply_markup:"markdown" }}
+    </div>
+  </section>
+{% endblock content %}
+
