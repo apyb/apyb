@@ -149,4 +149,4 @@ class Profile(models.Model):
     def save(self, *args, **kwargs):
         self._ensure_unique_board()
 
-        super(Profile, self).save(*args, **kwargs)
+        super().save(*args, **kwargs)
