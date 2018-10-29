@@ -35,7 +35,7 @@ ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=['localhost',
 
 DATABASES = {
     'default': env.db("DATABASE_URL",
-                      default="sqlite://associados.db"),
+                      default="sqlite://apyb/apyb/associados.db"),
 }
 
 # Application definition

@@ -16,7 +16,6 @@ def production():
     env.releases_path = os.path.join(env.deploy_path, 'releases')
     env.shared_path = os.path.join(env.deploy_path, 'shared')
     env.shared_files = [
-        'apyb/apyb/settings/local.py',
         'apyb/apyb/media',
     ]
     env.releases_limit = 3

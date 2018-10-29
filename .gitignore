@@ -4,6 +4,7 @@
 .coverage
 local.py
 package-lock.json
+associados.db
 Pipfile
 Pipfile.lock
 node_modules/
