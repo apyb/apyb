@@ -23,19 +23,19 @@ ROOT_DIR = environ.Path(__file__) - 2  # (/a/b/myfile.py - 3 = /)
 
 # DEBUG
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#debug
-DEBUG = env("DEBUG", default=True)
+DEBUG = env('DEBUG', default=True)
 
 # SECRET CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
-SECRET_KEY = env("DJANGO_SECRET_KEY", default='CHANGEME!!!')
+SECRET_KEY = env('DJANGO_SECRET_KEY', default='CHANGEME!!!')
 
 # Allowed Hosts
-ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=['localhost',
-                                                   '127.0.0.1'])
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['localhost', '127.0.0.1'])
 
 DATABASES = {
-    'default': env.db("DATABASE_URL",
-                      default="sqlite://apyb/apyb/associados.db"),
+    'default': env.db(
+        'DATABASE_URL', default='sqlite://apyb/apyb/associados.db'
+    ),
 }
 
 # Application definition
@@ -104,8 +104,9 @@ TEMPLATES = [
 WSGI_APPLICATION = 'apyb.wsgi.application'
 
 # CORS Configuration
-CORS_ORIGIN_WHITELIST = env.list("CORS_ORIGIN_WHITELIST",
-                                 default=['localhost:8000'])
+CORS_ORIGIN_WHITELIST = env.list(
+    'CORS_ORIGIN_WHITELIST', default=['localhost:8000']
+)
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
