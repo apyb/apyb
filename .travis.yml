@@ -3,6 +3,6 @@ python:
     - 3.6
 install:
     - pip install -r requirements-dev.txt
-script: make cover
+script: make lint && make cover
 after_success:
     - make coveralls
