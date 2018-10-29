@@ -1,0 +1,25 @@
+{% extends "website/base.html" %}
+
+{% block content %}
+
+{% if next %}
+  {% if user.is_authenticated %}
+    <p>
+      Sua conta não tem acesso a esta página. Para continuar, faça login com
+      uma conta que tenha acesso.
+    </p>
+  {% else %}
+    <p>Faça login para ver esta página.</p>
+  {% endif %}
+{% endif %}
+
+<form method="post" action="{% url 'login' %}">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <input type="submit" value="Enviar">
+  <input type="hidden" name="next" value="{{ next }}">
+</form>
+
+<p><a href="{% url 'password_reset' %}">Redefinir senha</a></p>
+
+{% endblock %}
