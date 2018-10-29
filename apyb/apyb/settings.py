@@ -48,12 +48,14 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
 
+    # Markdown support
     'django_markup',
+
     # authentication provider
     'oauth2_provider',
     'corsheaders',
 
-    #allauth
+    # allauth
     'allauth',
     'allauth.account',
     'allauth.socialaccount',

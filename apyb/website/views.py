@@ -19,7 +19,7 @@ class Home(TemplateView):
     template_name = 'website/home.html'
 
     def get_context_data(self, **kwargs):
-        context = super(Home, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
 
         context['hero_photos'] = HERO_PHOTOS
 
@@ -30,11 +30,15 @@ class Markdown(TemplateView):
     template_name = 'website/markdown.html'
 
     def get_context_data(self, **kwargs):
-        context = super(Markdown, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         try:
             web_content = WebContent.objects.get(slug=kwargs['slug'])
         except WebContent.DoesNotExist:
             raise Http404("WebContent does not exist")
-        
-        context['markdown_content'] = formatter(web_content.markdown_content, filter_name='markdown', safe_mode=False)
+
+        context['markdown_content'] = formatter(
+            web_content.markdown_content,
+            filter_name='markdown',
+            safe_mode=False)
+
         return context
