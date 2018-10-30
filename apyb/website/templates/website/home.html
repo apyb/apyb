@@ -1,11 +1,30 @@
 {% extends 'website/base.html' %}
 
 {% block content %}
+  <section id="heroHome" class="hero is-dark is-fullheight hero-home">
+    {% for photo in hero_photos %}
+      <div style="background-image: url('{{ photo }}'); {% if forloop.first %}opacity: 0.6{% else %}opacity: 0{% endif %};" class="home-hero-img"></div>
+    {% endfor %}
+
+    <div class="hero-body">
+      <div class="container has-text-centered">
+        <h1 class="title">
+          Associação Python Brasil
+        </h1>
+
+        <h2 class="subtitle">
+          Empoderando pessoas para fazer a diferença
+        </h2>
+      </div>
+    </div>
+  </section>
+
   <section class="section is-medium home-intro">
     <div class="container">
       <div class="columns">
         <div class="column is-4">
         </div>
+
         <div class="column is-8">
           <h1 class="title">
             A APyB
@@ -34,3 +53,21 @@
     </div>
   </section>
 {% endblock content %}
+
+{% block bottom_javascript %}
+  <script charset="utf-8">
+    // Hero fade image
+    var i = 1;
+    var heroPhotos = document.getElementsByClassName('home-hero-img');
+
+    setInterval(function() {
+      var current = i - 1;
+      var next = i;
+
+      heroPhotos[current % heroPhotos.length].style.opacity = 0;
+      heroPhotos[next % heroPhotos.length].style.opacity = 0.6;
+
+      i++;
+    }, 5000);
+  </script>
+{% endblock bottom_javascript %}

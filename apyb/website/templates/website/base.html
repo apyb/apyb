@@ -1,6 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
-<html>
+<html class="has-navbar-fixed-top">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,6 +10,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
     <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
     <style type="text/css" media="screen">
+      .navbar-brand img {
+        margin-right: 10px;
+      }
+
       .hero-home .hero-body, .hero-home .hero-head {
         background-color: #000000;
       }
@@ -41,65 +45,45 @@
 
   <body>
     {% block header %}
-      <section id="heroHome" class="hero is-dark is-fullheight hero-home">
-        {% for photo in hero_photos %}
-          <div style="background-image: url('{{ photo }}'); {% if forloop.first %}opacity: 0.6{% else %}opacity: 0{% endif %};" class="home-hero-img"></div>
-        {% endfor %}
-        <!-- Hero head: will stick at the top -->
-        <div class="hero-head">
-          <header class="navbar">
-            <div class="container">
-              <div class="navbar-brand">
-                <a class="navbar-item" href="{% url 'home' %}">
-                  <h1>APyB</h1>
+      <header class="navbar is-black is-fixed-top">
+        <div class="container">
+          <div class="navbar-brand">
+            <a class="navbar-item" href="{% url 'home' %}">
+                <img src="{% static 'website/img/python-logo.png' %}" alt="Python Logo"/>
+                <b>APyB</b>
+            </a>
+
+            <span class="navbar-burger burger" data-target="navbarMenuHero">
+              <span></span>
+              <span></span>
+              <span></span>
+            </span>
+          </div>
+
+          <div id="navbarMenuHero" class="navbar-menu">
+            <div class="navbar-end">
+              {% if user.is_authenticated %}
+                <span class="navbar-item">
+                  Autenticado como: {{ user.username }}
+                </span>
+                <a href="{% url 'logout' %}" class="navbar-item">
+                  Sair
+                </a>
+              {% else %}
+                <a href="{% url 'login' %}" class="navbar-item">
+                  Login
                 </a>
 
-                <span class="navbar-burger burger" data-target="navbarMenuHero">
-                  <span></span>
-                  <span></span>
-                  <span></span>
+                <span class="navbar-item">
+                  <a href="https://associados.python.org.br/members/signup/" class="button is-dark is-inverted">
+                    <span>Participe</span>
+                  </a>
                 </span>
-              </div>
-
-              <div id="navbarMenuHero" class="navbar-menu">
-                <div class="navbar-end">
-                  {% if user.is_authenticated %}
-                    <span class="navbar-item">
-                      Autenticado como: {{ user.username }}
-                    </span>
-                    <a href="{% url 'logout' %}" class="navbar-item">
-                      Sair
-                    </a>
-                  {% else %}
-                    <a href="{% url 'login' %}" class="navbar-item">
-                      Login
-                    </a>
-
-                    <span class="navbar-item">
-                      <a href="https://associados.python.org.br/members/signup/" class="button is-dark is-inverted">
-                        <span>Participe</span>
-                      </a>
-                    </span>
-                  {% endif %}
-                </div>
-              </div>
+              {% endif %}
             </div>
-          </header>
-        </div>
-
-        <!-- Hero content: will be in the middle -->
-        <div class="hero-body">
-          <div class="container has-text-centered">
-            <h1 class="title">
-              Associação Python Brasil
-            </h1>
-
-            <h2 class="subtitle">
-              Empoderando pessoas para fazer a diferença
-            </h2>
           </div>
         </div>
-      </section>
+      </header>
     {% endblock header %}
 
     {% block content %}
@@ -131,22 +115,6 @@
         }
 
       });
-    </script>
-
-    <script charset="utf-8">
-      // Hero fade image
-      var i = 1;
-      var heroPhotos = document.getElementsByClassName('home-hero-img');
-
-      setInterval(function() {
-        var current = i - 1;
-        var next = i;
-
-        heroPhotos[current % heroPhotos.length].style.opacity = 0;
-        heroPhotos[next % heroPhotos.length].style.opacity = 0.6;
-
-        i++;
-      }, 5000);
     </script>
 
     {% block bottom_javascript %}
