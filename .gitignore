@@ -2,6 +2,7 @@
 *.pyo
 *.sqlite3
 .coverage
+.env
 local.py
 package-lock.json
 associados.db

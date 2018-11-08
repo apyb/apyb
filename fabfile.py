@@ -17,9 +17,10 @@ def production():
     env.shared_path = os.path.join(env.deploy_path, 'shared')
     env.shared_files = [
         'apyb/apyb/media',
+        'apyb/apyb/.env',
     ]
     env.releases_limit = 3
-    env.git_origin = 'https://github.com/humrochagf/apyb.git'
+    env.git_origin = 'https://github.com/pythonbrasil/apyb.git'
     env.git_branch = 'master'
     env.virtualenv = os.path.join(env.app_path, 'activate')
 

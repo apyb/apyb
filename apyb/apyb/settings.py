@@ -15,7 +15,7 @@ import environ
 
 env = environ.Env(
     DEBUG=(bool, False),
-    )
+)
 env.read_env()
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
@@ -161,11 +161,13 @@ USE_TZ = True
 
 MEDIA_URL = '/media/'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = env('DJANGO_MEDIA_ROOT', default=os.path.join(BASE_DIR, 'media'))
 
 STATIC_URL = '/static/'
 
-STATIC_ROOT = os.path.join(MEDIA_ROOT, 'static')
+STATIC_ROOT = env(
+    'DJANGO_STATIC_ROOT', default=os.path.join(MEDIA_ROOT, 'static')
+)
 
 
 LOGIN_URL = '/login'
