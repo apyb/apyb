@@ -163,7 +163,7 @@ MEDIA_URL = '/media/'
 
 MEDIA_ROOT = env('DJANGO_MEDIA_ROOT', default=os.path.join(BASE_DIR, 'media'))
 
-STATIC_URL = '/static/'
+STATIC_URL = '/media/static/'
 
 STATIC_ROOT = env(
     'DJANGO_STATIC_ROOT', default=os.path.join(MEDIA_ROOT, 'static')
