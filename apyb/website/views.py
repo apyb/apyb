@@ -1,7 +1,7 @@
 import os
 
 from django.contrib.staticfiles.finders import find
-from django.contrib.staticfiles.templatetags.staticfiles import static
+from django.templatetags.static import static
 from django.http import Http404
 from django.views.generic import TemplateView
 from django_markup.markup import formatter
