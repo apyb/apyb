@@ -142,6 +142,8 @@ AUTHENTICATION_BACKENDS = (
 
 SITE_ID = 1
 
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
 
