@@ -1,5 +1,5 @@
 from django.test import TestCase
-from model_mommy import mommy
+from model_bakery import baker
 
 from .models import WebContent
 
@@ -14,7 +14,7 @@ SAMPLE_CONTENT = """
 class WebContentTestCase(TestCase):
 
     def test_web_content(self):
-        content = mommy.make(
+        content = baker.make(
             WebContent,
             title="a title",
             markdown_content=SAMPLE_CONTENT)
