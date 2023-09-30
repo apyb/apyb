@@ -1,5 +1,5 @@
 gunicorn==20.1.0
-Django==3.2.9
+Django==3.2.20
 psycopg2-binary==2.9.2
 django-environ==0.8.1
 django-markup==1.5
